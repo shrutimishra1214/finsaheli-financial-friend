@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Heart, Menu, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const Navigation = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
@@ -42,7 +44,11 @@ const Navigation = () => {
             <Button variant="safe" size="sm">
               Emergency Exit
             </Button>
-            <Button variant="hero" size="sm">
+            <Button 
+              variant="hero" 
+              size="sm"
+              onClick={() => navigate('/chat')}
+            >
               Get Started
             </Button>
           </div>
@@ -74,7 +80,12 @@ const Navigation = () => {
                 <Button variant="safe" size="sm" className="w-full">
                   Emergency Exit
                 </Button>
-                <Button variant="hero" size="sm" className="w-full">
+                <Button 
+                  variant="hero" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => navigate('/chat')}
+                >
                   Get Started
                 </Button>
               </div>

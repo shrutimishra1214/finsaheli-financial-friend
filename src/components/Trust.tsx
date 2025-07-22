@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 import { Shield, Eye, Lock, UserX } from "lucide-react";
 
 const Trust = () => {
+  const navigate = useNavigate();
   const trustFeatures = [
     {
       icon: Shield,
@@ -64,7 +66,12 @@ const Trust = () => {
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
               Your financial independence journey starts with a single conversation. Safe, private, and judgment-free.
             </p>
-            <Button size="lg" variant="hero" className="text-lg px-8 py-4">
+            <Button 
+              size="lg" 
+              variant="hero" 
+              className="text-lg px-8 py-4"
+              onClick={() => navigate('/chat')}
+            >
               Start Chatting Now
             </Button>
           </div>

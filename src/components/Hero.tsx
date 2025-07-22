@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Shield, Lock, Heart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-subtle">
       <div className="absolute inset-0 bg-gradient-to-br from-sage-lighter/50 to-transparent" />
@@ -26,7 +28,12 @@ const Hero = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
-              <Button size="lg" variant="hero" className="text-lg px-8 py-4">
+              <Button 
+                size="lg" 
+                variant="hero" 
+                className="text-lg px-8 py-4"
+                onClick={() => navigate('/chat')}
+              >
                 Start Your Journey
               </Button>
               <Button size="lg" variant="warm" className="text-lg px-8 py-4">
