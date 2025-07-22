@@ -42,11 +42,20 @@ All colors MUST be HSL.
     --sage-lighter: 158 35% 94%;
     --warm: 35 77% 92%;
     --warm-accent: 25 85% 75%;
+    --pink: 326 82% 65%;
+    --pink-light: 326 50% 85%;
+    --pink-lighter: 326 35% 94%;
+    --purple: 280 75% 70%;
+    --purple-light: 280 45% 85%;
+    --purple-lighter: 280 30% 94%;
     
     /* Gradients */
     --gradient-hero: linear-gradient(135deg, hsl(var(--sage)) 0%, hsl(158 45% 45%) 100%);
     --gradient-warm: linear-gradient(135deg, hsl(var(--warm)) 0%, hsl(var(--warm-accent)) 100%);
     --gradient-subtle: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--sage-lighter)) 100%);
+    --gradient-pink: linear-gradient(135deg, hsl(var(--pink)) 0%, hsl(var(--pink-light)) 100%);
+    --gradient-purple: linear-gradient(135deg, hsl(var(--purple)) 0%, hsl(var(--purple-light)) 100%);
+    --gradient-feminine: linear-gradient(135deg, hsl(var(--pink)) 0%, hsl(var(--purple)) 100%);
     
     /* Shadows */
     --shadow-soft: 0 4px 20px -4px hsl(var(--sage) / 0.15);

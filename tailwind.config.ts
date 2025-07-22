@@ -61,6 +61,16 @@ export default {
 					DEFAULT: 'hsl(var(--warm))',
 					accent: 'hsl(var(--warm-accent))'
 				},
+				pink: {
+					DEFAULT: 'hsl(var(--pink))',
+					light: 'hsl(var(--pink-light))',
+					lighter: 'hsl(var(--pink-lighter))'
+				},
+				purple: {
+					DEFAULT: 'hsl(var(--purple))',
+					light: 'hsl(var(--purple-light))',
+					lighter: 'hsl(var(--purple-lighter))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -80,7 +90,10 @@ export default {
 			backgroundImage: {
 				'gradient-hero': 'var(--gradient-hero)',
 				'gradient-warm': 'var(--gradient-warm)',
-				'gradient-subtle': 'var(--gradient-subtle)'
+				'gradient-subtle': 'var(--gradient-subtle)',
+				'gradient-pink': 'var(--gradient-pink)',
+				'gradient-purple': 'var(--gradient-purple)',
+				'gradient-feminine': 'var(--gradient-feminine)'
 			},
 			boxShadow: {
 				'soft': 'var(--shadow-soft)',
