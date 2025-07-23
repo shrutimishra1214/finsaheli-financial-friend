@@ -5,39 +5,39 @@ const Features = () => {
   const features = [
     {
       icon: MessageCircle,
-      title: "AI Saheli Chatbot",
-      description: "Warm, conversational AI that understands your unique situation and guides you with empathy and care.",
-      color: "sage"
+      title: "आपकी सहेली चैटबॉट",
+      description: "गर्मजोशी भरी बातचीत जो आपकी परिस्थिति को समझती है और संवेदना के साथ मार्गदर्शन करती है।",
+      color: "pink"
     },
     {
       icon: ShieldCheck,
-      title: "Privacy First",
-      description: "Complete anonymity, no mandatory sign-up, and discreet mode for shared devices. Your secrets stay yours.",
-      color: "warm"
+      title: "गोपनीयता सबसे पहले",
+      description: "पूर्ण गुमनामी, बिना रजिस्ट्रेशन, और साझा डिवाइस के लिए गुप्त मोड। आपके राज आपके ही रहते हैं।",
+      color: "purple"
     },
     {
       icon: Calculator,
-      title: "Smart Financial Planning",
-      description: "Assess hidden assets, build emergency funds, and create custom roadmaps for your financial independence.",
-      color: "sage"
+      title: "स्मार्ट वित्तीय योजना",
+      description: "छुपी संपत्ति का आकलन, आपातकालीन फंड बनाना, और वित्तीय स्वतंत्रता के लिए योजना।",
+      color: "pink"
     },
     {
       icon: Users,
-      title: "Support Network",
-      description: "Real-time connections to local legal aid, shelters, and counseling services tailored to your location.",
-      color: "warm"
+      title: "सहायता नेटवर्क",
+      description: "स्थानीय कानूनी सहायता, महिला आश्रय, और परामर्श सेवाओं से तुरंत जुड़ाव।",
+      color: "purple"
     },
     {
       icon: AlertTriangle,
-      title: "Crisis Features",
-      description: "Emergency quick-exit button, secure passcode protection, and guidance for urgent financial situations.",
-      color: "sage"
+      title: "संकट सुविधाएं",
+      description: "आपातकालीन त्वरित-निकास बटन, सुरक्षित पासकोड सुरक्षा, और तत्काल वित्तीय सहायता।",
+      color: "pink"
     },
     {
       icon: MapPin,
-      title: "Local Resources",
-      description: "Comprehensive database of women-focused financial and legal resources across India and beyond.",
-      color: "warm"
+      title: "स्थानीय संसाधन",
+      description: "भारत भर में महिला-केंद्रित वित्तीय और कानूनी संसाधनों का व्यापक डेटाबेस।",
+      color: "purple"
     }
   ];
 
@@ -46,10 +46,10 @@ const Features = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Built for <span className="text-sage">Your Safety</span> & <span className="text-sage">Success</span>
+            आपकी <span className="text-pink">सुरक्षा</span> और <span className="text-purple">सफलता</span> के लिए बनाया गया
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Every feature designed with women's unique financial challenges in mind
+            हर सुविधा महिलाओं की विशिष्ट वित्तीय चुनौतियों को ध्यान में रखकर डिज़ाइन की गई है
           </p>
         </div>
         
@@ -61,10 +61,10 @@ const Features = () => {
             >
               <CardHeader className="text-center pb-4">
                 <div className={`w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 ${
-                  feature.color === 'sage' ? 'bg-sage-lighter' : 'bg-warm'
+                  feature.color === 'pink' ? 'bg-pink-lighter' : 'bg-purple-lighter'
                 }`}>
                   <feature.icon className={`w-8 h-8 ${
-                    feature.color === 'sage' ? 'text-sage' : 'text-foreground'
+                    feature.color === 'pink' ? 'text-pink' : 'text-purple'
                   }`} />
                 </div>
                 <CardTitle className="text-xl font-semibold text-foreground">

@@ -21,6 +21,9 @@ const buttonVariants = cva(
         hero: "bg-gradient-hero text-white hover:shadow-warm transition-all duration-300 transform hover:scale-105",
         warm: "bg-gradient-warm text-foreground hover:bg-warm-accent/90 shadow-soft border border-warm-accent/30",
         safe: "bg-sage-lighter text-sage border border-sage/20 hover:bg-sage/10 transition-colors",
+        feminine: "bg-gradient-feminine text-white hover:shadow-glow transition-all duration-300 transform hover:scale-105",
+        pink: "bg-gradient-pink text-white hover:bg-pink/90 shadow-soft",
+        purple: "bg-gradient-purple text-white hover:bg-purple/90 shadow-soft",
       },
       size: {
         default: "h-10 px-4 py-2",
