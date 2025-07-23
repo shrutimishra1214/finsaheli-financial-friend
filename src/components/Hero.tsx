@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Shield, Lock, Heart } from "lucide-react";
+import { Shield, Building2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-image-indian.jpg";
 
@@ -13,42 +13,42 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left animate-fade-in">
-            <div className="inline-flex items-center gap-2 bg-pink-lighter px-4 py-2 rounded-full text-pink font-medium text-sm mb-6">
-              <Heart className="w-4 h-4" />
-              आपकी विश्वसनीय सहेली
+            <div className="inline-flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-full text-blue-600 font-medium text-sm mb-6">
+              <Shield className="w-4 h-4" />
+              <span className="font-hindi">बैंक ऑफ इंडिया द्वारा प्रमाणित सेवा</span>
             </div>
             
-            <h1 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-              वित्तीय सशक्तिकरण,{" "}
-              <span className="text-pink">सहेली के साथ</span>
+            <h1 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight font-hindi">
+              महिला वित्तीय सशक्तिकरण{" "}
+              <span className="text-blue-600">केंद्र</span>
             </h1>
             
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-xl lg:max-w-none">
-              महिलाओं के लिए एक सुरक्षित और निजी स्थान जहां वे अपने वित्तीय भविष्य की योजना बना सकती हैं। तलाक से लेकर नौकरी खोने तक - हम आपके साथ हैं।
+            <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-xl lg:max-w-none font-hindi">
+              बैंक ऑफ इंडिया की तरफ से महिलाओं के लिए विशेष वित्तीय परामर्श सेवा। तलाक, नौकरी खोने या किसी भी वित्तीय संकट में हम आपके साथ हैं।
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
               <Button 
                 size="lg" 
-                variant="feminine" 
-                className="text-lg px-8 py-4"
+                variant="default" 
+                className="text-lg px-8 py-4 bg-blue-600 hover:bg-blue-700 font-hindi"
                 onClick={() => navigate('/chat')}
               >
-                अपनी यात्रा शुरू करें
+                सलाह शुरू करें
               </Button>
-              <Button size="lg" variant="pink" className="text-lg px-8 py-4">
-                और जानें
+              <Button size="lg" variant="outline" className="text-lg px-8 py-4 font-hindi">
+                अधिक जानकारी
               </Button>
             </div>
             
             <div className="flex items-center justify-center lg:justify-start gap-8 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
-                <Shield className="w-4 h-4 text-pink" />
-                <span>100% निजी</span>
+                <Shield className="w-4 h-4 text-blue-600" />
+                <span className="font-hindi">100% गुप्त</span>
               </div>
               <div className="flex items-center gap-2">
-                <Lock className="w-4 h-4 text-pink" />
-                <span>सुरक्षित और गुमनाम</span>
+                <Building2 className="w-4 h-4 text-blue-600" />
+                <span className="font-hindi">बैंक द्वारा सुरक्षित</span>
               </div>
             </div>
           </div>
@@ -61,10 +61,10 @@ const Hero = () => {
                 alt="सशक्त भारतीय महिला अपने वित्तीय भविष्य की योजना बनाते हुए" 
                 className="w-full h-auto object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-pink/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 to-transparent" />
             </div>
-            <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-pink rounded-full shadow-glow opacity-60"></div>
-            <div className="absolute -top-6 -left-6 w-16 h-16 bg-purple-light rounded-full shadow-soft opacity-80"></div>
+            <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-r from-blue-500 to-blue-700 rounded-full shadow-glow opacity-60"></div>
+            <div className="absolute -top-6 -left-6 w-16 h-16 bg-blue-200 rounded-full shadow-soft opacity-80"></div>
           </div>
         </div>
       </div>
