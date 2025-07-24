@@ -3,16 +3,18 @@ import { Building2, Menu, X, Shield } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LanguageDropdown from "./LanguageDropdown";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Navigation = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   const navItems = [
-    { label: "सुविधाएं", href: "#features" },
-    { label: "गोपनीयता", href: "#privacy" },
-    { label: "सहायता", href: "#support" },
-    { label: "संसाधन", href: "#resources" }
+    { label: t('nav.features'), href: "#features" },
+    { label: t('nav.privacy'), href: "#privacy" },
+    { label: t('nav.support'), href: "#support" },
+    { label: t('nav.resources'), href: "#resources" }
   ];
 
   return (
@@ -25,8 +27,8 @@ const Navigation = () => {
               <Building2 className="w-5 h-5 text-white" />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-bold text-foreground font-hindi">बैंक ऑफ इंडिया</span>
-              <span className="text-xs text-muted-foreground">महिला वित्तीय सहायता</span>
+              <span className="text-lg font-bold text-foreground font-hindi">{t('nav.bankName')}</span>
+              <span className="text-xs text-muted-foreground">{t('nav.subtitle')}</span>
             </div>
           </div>
           
@@ -48,7 +50,7 @@ const Navigation = () => {
             <LanguageDropdown />
             <Button variant="outline" size="sm" className="gap-2 border-red-200 text-red-600 hover:bg-red-50">
               <Shield className="w-4 h-4" />
-              <span className="font-hindi">तुरंत निकलें</span>
+              <span className="font-hindi">{t('nav.exitNow')}</span>
             </Button>
             <Button 
               variant="default" 
@@ -56,7 +58,7 @@ const Navigation = () => {
               className="bg-blue-600 hover:bg-blue-700 font-hindi"
               onClick={() => navigate('/chat')}
             >
-              शुरू करें
+              {t('nav.start')}
             </Button>
           </div>
           
@@ -87,7 +89,7 @@ const Navigation = () => {
                 <LanguageDropdown />
                 <Button variant="outline" size="sm" className="w-full gap-2 border-red-200 text-red-600 hover:bg-red-50 font-hindi">
                   <Shield className="w-4 h-4" />
-                  तुरंत निकलें
+                  {t('nav.exitNow')}
                 </Button>
                 <Button 
                   variant="default" 
@@ -95,7 +97,7 @@ const Navigation = () => {
                   className="w-full bg-blue-600 hover:bg-blue-700 font-hindi"
                   onClick={() => navigate('/chat')}
                 >
-                  शुरू करें
+                  {t('nav.start')}
                 </Button>
               </div>
             </div>

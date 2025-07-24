@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ChevronDown, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,9 +6,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useLanguage, Language as LanguageType } from "@/contexts/LanguageContext";
 
 interface Language {
-  code: string;
+  code: LanguageType;
   name: string;
   nativeName: string;
 }
@@ -21,12 +21,11 @@ const languages: Language[] = [
 ];
 
 const LanguageDropdown = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState<Language>(languages[0]); // Hindi as default
+  const { language, setLanguage } = useLanguage();
+  const selectedLanguage = languages.find(lang => lang.code === language) || languages[0];
 
-  const handleLanguageChange = (language: Language) => {
-    setSelectedLanguage(language);
-    // Here you would typically implement the actual language switching logic
-    console.log('Switching to language:', language.code);
+  const handleLanguageChange = (lang: Language) => {
+    setLanguage(lang.code);
   };
 
   return (
