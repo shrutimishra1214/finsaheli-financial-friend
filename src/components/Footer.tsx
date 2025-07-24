@@ -11,11 +11,15 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
-                <Building2 className="w-5 h-5 text-white" />
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden">
+                <img 
+                  src="/lovable-uploads/a0110b81-b651-4e14-ba11-7ef2ffa2e339.png" 
+                  alt="FinSaheli Logo" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="flex flex-col">
-                <span className="text-lg font-bold font-hindi">{t('footer.bankName')}</span>
+                <span className="text-lg font-bold font-hindi">{t('footer.brandName')}</span>
                 <span className="text-xs text-background/70">{t('footer.subtitle')}</span>
               </div>
             </div>
@@ -56,7 +60,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-2 text-background/70 font-hindi">
                 <Shield className="w-4 h-4" />
-                <span>{t('footer.boiHelpline')}</span>
+                <span>{t('footer.financeHelpline')}</span>
               </div>
               <Button variant="outline" size="sm" className="w-full mt-4 border-white/20 text-white hover:bg-white/10 font-hindi">
                 {t('footer.exitSite')}
@@ -70,9 +74,9 @@ const Footer = () => {
             {t('footer.copyright')}
           </p>
           <div className="flex items-center gap-4 text-sm text-background/70 font-hindi">
-            <span>{t('footer.rbiLicensed')}</span>
-            <Building2 className="w-4 h-4 text-blue-400" />
-            <span>{t('footer.govOwned')}</span>
+            <span>{t('footer.certified')}</span>
+            <Building2 className="w-4 h-4 text-primary/60" />
+            <span>{t('footer.womenEmpowerment')}</span>
           </div>
         </div>
       </div>

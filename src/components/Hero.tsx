@@ -15,14 +15,14 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left animate-fade-in">
-            <div className="inline-flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-full text-blue-600 font-medium text-sm mb-6">
+            <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full text-primary font-medium text-sm mb-6">
               <Shield className="w-4 h-4" />
               <span className="font-hindi">{t('hero.certified')}</span>
             </div>
             
             <h1 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight font-hindi">
               {t('hero.title')}{" "}
-              <span className="text-blue-600">{t('hero.titleHighlight')}</span>
+              <span className="text-primary">{t('hero.titleHighlight')}</span>
             </h1>
             
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-xl lg:max-w-none font-hindi">
@@ -33,7 +33,7 @@ const Hero = () => {
               <Button 
                 size="lg" 
                 variant="default" 
-                className="text-lg px-8 py-4 bg-blue-600 hover:bg-blue-700 font-hindi"
+                className="text-lg px-8 py-4 bg-primary hover:bg-primary/90 text-primary-foreground font-hindi"
                 onClick={() => navigate('/chat')}
               >
                 {t('hero.startConsultation')}
@@ -45,12 +45,12 @@ const Hero = () => {
             
             <div className="flex items-center justify-center lg:justify-start gap-8 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
-                <Shield className="w-4 h-4 text-blue-600" />
+                <Shield className="w-4 h-4 text-primary" />
                 <span className="font-hindi">{t('hero.confidential')}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Building2 className="w-4 h-4 text-blue-600" />
-                <span className="font-hindi">{t('hero.bankSecured')}</span>
+                <Building2 className="w-4 h-4 text-secondary" />
+                <span className="font-hindi">{t('hero.secure')}</span>
               </div>
             </div>
           </div>
@@ -63,10 +63,10 @@ const Hero = () => {
                 alt="सशक्त भारतीय महिला अपने वित्तीय भविष्य की योजना बनाते हुए" 
                 className="w-full h-auto object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
             </div>
-            <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-r from-blue-500 to-blue-700 rounded-full shadow-glow opacity-60"></div>
-            <div className="absolute -top-6 -left-6 w-16 h-16 bg-blue-200 rounded-full shadow-soft opacity-80"></div>
+            <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-r from-primary to-secondary rounded-full shadow-glow opacity-60"></div>
+            <div className="absolute -top-6 -left-6 w-16 h-16 bg-primary/20 rounded-full shadow-soft opacity-80"></div>
           </div>
         </div>
       </div>

@@ -23,11 +23,15 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
-              <Building2 className="w-5 h-5 text-white" />
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden">
+              <img 
+                src="/lovable-uploads/a0110b81-b651-4e14-ba11-7ef2ffa2e339.png" 
+                alt="FinSaheli Logo" 
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-bold text-foreground font-hindi">{t('nav.bankName')}</span>
+              <span className="text-lg font-bold text-foreground font-hindi">{t('nav.brandName')}</span>
               <span className="text-xs text-muted-foreground">{t('nav.subtitle')}</span>
             </div>
           </div>
@@ -48,14 +52,14 @@ const Navigation = () => {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
             <LanguageDropdown />
-            <Button variant="outline" size="sm" className="gap-2 border-red-200 text-red-600 hover:bg-red-50">
+            <Button variant="outline" size="sm" className="gap-2 border-destructive/20 text-destructive hover:bg-destructive/10">
               <Shield className="w-4 h-4" />
               <span className="font-hindi">{t('nav.exitNow')}</span>
             </Button>
             <Button 
               variant="default" 
               size="sm"
-              className="bg-blue-600 hover:bg-blue-700 font-hindi"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-hindi"
               onClick={() => navigate('/chat')}
             >
               {t('nav.start')}
@@ -87,14 +91,14 @@ const Navigation = () => {
               ))}
               <div className="flex flex-col gap-2 pt-4 border-t border-border">
                 <LanguageDropdown />
-                <Button variant="outline" size="sm" className="w-full gap-2 border-red-200 text-red-600 hover:bg-red-50 font-hindi">
+                <Button variant="outline" size="sm" className="w-full gap-2 border-destructive/20 text-destructive hover:bg-destructive/10 font-hindi">
                   <Shield className="w-4 h-4" />
                   {t('nav.exitNow')}
                 </Button>
                 <Button 
                   variant="default" 
                   size="sm" 
-                  className="w-full bg-blue-600 hover:bg-blue-700 font-hindi"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-hindi"
                   onClick={() => navigate('/chat')}
                 >
                   {t('nav.start')}
