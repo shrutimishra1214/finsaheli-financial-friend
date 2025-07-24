@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Building2, Menu, X, Shield } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LanguageDropdown from "./LanguageDropdown";
@@ -10,20 +10,13 @@ const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useLanguage();
 
-  const navItems = [
-    { label: t('nav.features'), href: "#features" },
-    { label: t('nav.privacy'), href: "#privacy" },
-    { label: t('nav.support'), href: "#support" },
-    { label: t('nav.resources'), href: "#resources" }
-  ];
-
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden">
+        <div className="flex items-center h-20">
+          {/* Logo - Always stays left */}
+          <div className="flex items-center gap-4 flex-shrink-0">
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center overflow-hidden">
               <img 
                 src="/lovable-uploads/a0110b81-b651-4e14-ba11-7ef2ffa2e339.png" 
                 alt="FinSaheli Logo" 
@@ -31,31 +24,17 @@ const Navigation = () => {
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-bold text-foreground font-hindi">{t('nav.brandName')}</span>
-              <span className="text-xs text-muted-foreground">{t('nav.subtitle')}</span>
+              <span className="text-2xl font-bold text-foreground font-hindi">{t('nav.brandName')}</span>
+              <span className="text-sm text-muted-foreground">{t('nav.subtitle')}</span>
             </div>
           </div>
           
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-muted-foreground hover:text-blue-600 transition-colors font-hindi"
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
+          {/* Spacer to push CTA to right */}
+          <div className="flex-1"></div>
           
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
             <LanguageDropdown />
-            <Button variant="outline" size="sm" className="gap-2 border-destructive/20 text-destructive hover:bg-destructive/10">
-              <Shield className="w-4 h-4" />
-              <span className="font-hindi">{t('nav.exitNow')}</span>
-            </Button>
             <Button 
               variant="default" 
               size="sm"
@@ -68,7 +47,7 @@ const Navigation = () => {
           
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-lg hover:bg-accent"
+            className="md:hidden p-2 rounded-lg hover:bg-accent ml-4"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -77,24 +56,10 @@ const Navigation = () => {
         
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-background border-b border-border shadow-soft">
+          <div className="md:hidden absolute top-20 left-0 right-0 bg-background border-b border-border shadow-soft">
             <div className="p-4 space-y-4">
-              {navItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="block text-muted-foreground hover:text-blue-600 transition-colors py-2 font-hindi"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
-              <div className="flex flex-col gap-2 pt-4 border-t border-border">
+              <div className="flex flex-col gap-2">
                 <LanguageDropdown />
-                <Button variant="outline" size="sm" className="w-full gap-2 border-destructive/20 text-destructive hover:bg-destructive/10 font-hindi">
-                  <Shield className="w-4 h-4" />
-                  {t('nav.exitNow')}
-                </Button>
                 <Button 
                   variant="default" 
                   size="sm" 

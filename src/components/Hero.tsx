@@ -38,7 +38,12 @@ const Hero = () => {
               >
                 {t('hero.startConsultation')}
               </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 py-4 font-hindi">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="text-lg px-8 py-4 font-hindi"
+                onClick={() => navigate('/use-cases')}
+              >
                 {t('hero.moreInfo')}
               </Button>
             </div>
