@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from "react";
+import { useMutation } from "@tanstack/react-query";
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Send, ArrowLeft, Shield, AlertTriangle } from "lucide-react";
+import { Send, ArrowLeft, Shield, AlertTriangle, Mic, Volume2, VolumeX } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface Message {
@@ -23,8 +25,19 @@ const Chat = () => {
     }
   ]);
   const [inputText, setInputText] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
+  const [speakingMessageId, setSpeakingMessageId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition
+  } = useSpeechRecognition();
+
+  useEffect(() => {
+    setInputText(transcript);
+  }, [transcript]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -34,7 +47,75 @@ const Chat = () => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSendMessage = async () => {
+  // Clean up speech synthesis on component unmount
+  useEffect(() => {
+    return () => {
+      window.speechSynthesis.cancel();
+    };
+  }, []);
+
+  const { mutate: sendMessage, isPending } = useMutation({
+    mutationFn: async (newMessageText: string): Promise<string> => {
+      const response = await fetch("http://localhost:8080/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: newMessageText }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      // The API returns a JSON object with a 'reply' field, as per your backend code
+      const data = await response.json();
+      return data.reply;
+    },
+    onSuccess: (responseText) => {
+      const saheliMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: responseText,
+        sender: 'saheli',
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, saheliMessage]);
+    },
+    onError: (error) => {
+      console.error("Error sending message:", error);
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "I'm sorry, I'm having trouble connecting right now. Please try again in a moment.",
+        sender: 'saheli',
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    }
+  });
+
+  const handleSpeak = (text: string, messageId: string) => {
+    // If the same message is already speaking, cancel it
+    if (speakingMessageId === messageId) {
+      window.speechSynthesis.cancel();
+      setSpeakingMessageId(null);
+      return;
+    }
+
+    // Stop any other speech that might be in progress
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.onstart = () => setSpeakingMessageId(messageId);
+    utterance.onend = () => setSpeakingMessageId(null);
+    utterance.onerror = () => {
+      console.error("An error occurred during speech synthesis.");
+      setSpeakingMessageId(null);
+    };
+
+    window.speechSynthesis.speak(utterance);
+  };
+
+  const handleSendMessage = () => {
     if (!inputText.trim()) return;
 
     const userMessage: Message = {
@@ -45,31 +126,9 @@ const Chat = () => {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    sendMessage(inputText);
     setInputText("");
-    setIsTyping(true);
-
-    // Simulate AI response
-    setTimeout(() => {
-      const responses = [
-        "I understand this might be a difficult time for you. Let's take this step by step. Can you tell me a bit about your current situation? Remember, everything we discuss here is completely private.",
-        "That sounds challenging, but you're taking a brave step by reaching out. Let's focus on what we can control. Would you like to start by looking at your current financial resources?",
-        "I'm here to support you through this. Financial planning during transitions can feel overwhelming, but we'll break it down into manageable steps. What feels most urgent to you right now?",
-        "Your safety and privacy are my top priorities. Whatever you're comfortable sharing, we can work with. Would you like to explore emergency financial planning or long-term independence strategies?",
-        "I can sense you might be feeling uncertain, and that's completely normal. Many women have walked this path before you. Shall we start with understanding what assets and resources you currently have access to?"
-      ];
-      
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      
-      const saheliMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: randomResponse,
-        sender: 'saheli',
-        timestamp: new Date()
-      };
-
-      setMessages(prev => [...prev, saheliMessage]);
-      setIsTyping(false);
-    }, 1500);
+    resetTranscript();
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -102,7 +161,7 @@ const Chat = () => {
             </Button>
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-gradient-hero rounded-full flex items-center justify-center">
-                <span className="text-white text-sm font-bold">FS</span>
+                <span className="text-black text-sm font-bold">FS</span>
               </div>
               <div>
                 <h1 className="font-semibold text-foreground">Your FinSaheli</h1>
@@ -133,20 +192,30 @@ const Chat = () => {
       <div className="flex-1 overflow-y-auto p-4">
         <div className="container mx-auto max-w-4xl space-y-4">
           {messages.map((message) => (
-            <div key={message.id} className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+            <div key={message.id} className={`flex items-end gap-2 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+              {message.sender === 'saheli' && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="w-8 h-8 text-muted-foreground hover:text-foreground"
+                  onClick={() => handleSpeak(message.text, message.id)}
+                >
+                  {speakingMessageId === message.id ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+                </Button>
+              )}
               <Card className={`max-w-xs sm:max-w-md lg:max-w-lg border-0 shadow-soft ${
                 message.sender === 'user' 
-                  ? 'bg-gradient-hero text-white' 
+                  ? 'bg-gradient-hero text-black' 
                   : 'bg-card'
               }`}>
                 <CardContent className="p-4">
                   <p className={`text-sm leading-relaxed ${
-                    message.sender === 'user' ? 'text-white' : 'text-foreground'
+                    message.sender === 'user' ? 'text-black' : 'text-foreground' // This was already correct
                   }`}>
                     {message.text}
                   </p>
                   <p className={`text-xs mt-2 ${
-                    message.sender === 'user' ? 'text-white/70' : 'text-muted-foreground'
+                    message.sender === 'user' ? 'text-black/70' : 'text-muted-foreground'
                   }`}>
                     {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </p>
@@ -155,7 +224,7 @@ const Chat = () => {
             </div>
           ))}
           
-          {isTyping && (
+          {isPending && (
             <div className="flex justify-start">
               <Card className="border-0 shadow-soft bg-card">
                 <CardContent className="p-4">
@@ -177,16 +246,28 @@ const Chat = () => {
       <div className="bg-card/80 backdrop-blur-sm border-t border-border p-4">
         <div className="container mx-auto max-w-4xl">
           <div className="flex gap-2">
+            {browserSupportsSpeechRecognition && (
+              <Button
+                onClick={() => listening ? SpeechRecognition.stopListening() : SpeechRecognition.startListening()}
+                variant="ghost"
+                size="sm"
+                className={`px-3 ${listening ? 'text-red-500 hover:text-red-600' : 'text-muted-foreground'}`}
+                disabled={isPending}
+              >
+                <Mic className="w-5 h-5" />
+              </Button>
+            )}
             <Input
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Share what's on your mind... Everything here is private and safe."
-              className="flex-1 border-border focus:ring-sage"
+              placeholder={listening ? "Listening..." : "Share what's on your mind... or use the mic to speak."}
+              className="flex-1 border-border focus:ring-sage disabled:opacity-50"
+              disabled={isPending}
             />
             <Button 
               onClick={handleSendMessage}
-              disabled={!inputText.trim()}
+              disabled={!inputText.trim() || isPending}
               variant="hero"
               size="sm"
               className="px-4"
