@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Send, ArrowLeft, Shield, AlertTriangle } from "lucide-react";
+import { Send, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface Message {
@@ -79,18 +79,13 @@ const Chat = () => {
     }
   };
 
-  const quickExit = () => {
-    // In a real app, this would redirect to a neutral website
-    window.open('https://www.google.com', '_blank');
-    window.location.href = 'https://www.google.com';
-  };
-
   return (
     <div className="min-h-screen bg-gradient-subtle flex flex-col">
       {/* Header */}
       <div className="bg-card/80 backdrop-blur-sm border-b border-border p-4">
-        <div className="container mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
+        <div className="container mx-auto">
+          {/* Back Button */}
+          <div className="absolute">
             <Button 
               variant="ghost" 
               size="sm" 
@@ -100,38 +95,39 @@ const Chat = () => {
               <ArrowLeft className="w-4 h-4" />
               Back
             </Button>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-hero rounded-full flex items-center justify-center">
-                <span className="text-white text-sm font-bold">FS</span>
-              </div>
-              <div>
-                <h1 className="font-semibold text-foreground">Your FinSaheli</h1>
-                <p className="text-xs text-muted-foreground">Private & Secure</p>
-              </div>
-            </div>
           </div>
-          
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1 text-sage text-xs">
-              <Shield className="w-3 h-3" />
-              <span>Encrypted</span>
+
+          {/* Centered Logo and Title */}
+          <div className="flex flex-col items-center justify-center">
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center overflow-hidden mb-2">
+              <img 
+                src="/lovable-uploads/a0110b81-b651-4e14-ba11-7ef2ffa2e339.png" 
+                alt="FinSaheli Logo" 
+                className="w-full h-full object-cover"
+              />
             </div>
-            <Button 
-              variant="safe" 
-              size="sm" 
-              onClick={quickExit}
-              className="flex items-center gap-1"
-            >
-              <AlertTriangle className="w-3 h-3" />
-              Quick Exit
-            </Button>
+            <div className="text-center">
+              <h1 className="font-semibold text-foreground text-lg">Your FinSaheli</h1>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4">
-        <div className="container mx-auto max-w-4xl space-y-4">
+      <div className="flex-1 overflow-y-auto p-4 relative">
+        {/* Background Logo */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-96 h-96 opacity-5">
+            <img 
+              src="/lovable-uploads/a0110b81-b651-4e14-ba11-7ef2ffa2e339.png" 
+              alt=""
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+        
+        {/* Messages Container */}
+        <div className="container mx-auto max-w-4xl space-y-4 relative z-10">
           {messages.map((message) => (
             <div key={message.id} className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
               <Card className={`max-w-xs sm:max-w-md lg:max-w-lg border-0 shadow-soft ${
